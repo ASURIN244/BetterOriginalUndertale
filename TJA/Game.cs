@@ -19,7 +19,8 @@ namespace TJA
             Counter tennmetu = new Counter(0, 11, 50000, false);
             Counter SoulAnime = new Counter(0, 226, 2500, false);
             Counter Opacity = new Counter(0, 255, 1000, false);
-            Counter ATK = new Counter(0, 640, 10000, false);
+            Counter ATK = new Counter(0, 640, 3000, false);
+            Counter ATK2 = new Counter(0, 640, 3000, false);
             Counter ATKA = new Counter(0, 100, 5000, false);
             Counter ATKA2 = new Counter(0, 100, 5000, false);
             ctキー制限 = new Counter(0, 1, 100000, false);
@@ -72,8 +73,9 @@ namespace TJA
                 ATKA2.Tick();
                // ATK.Start();
                 ATK.Tick();
+                ATK2.Tick();
                 //SoulAnime.Start();
-              tennmetu.Tick();
+                tennmetu.Tick();
                 ctキー制限.Tick();
                 ctキー制限2.Tick();
                 tennmetu.Start();  
@@ -198,6 +200,7 @@ namespace TJA
                             ATKA.Value = 0;
                             ATKA2.Value = 0;
                             ATK.Value = 0;
+                            ATK2.Value = 0;
                             n現在の選択行R = 0;
                             tキー入力R(2);
                             決定音.Play();
@@ -293,20 +296,32 @@ namespace TJA
                         A.Draw((float)(640 / 2), (float)(480 / 2));
                         if (ATKA.Value==100)
                         {
-                            ATK.Start();
+
                             Atv.Draw(0+ATK.Value, 0);
                         }
-                        if (ATK.Value == ATK.End)
+                        else { A.ScaleX = ATKA.Value / 100f; }
+                        if (ATKA.Value == 99)
+                        {
+                            ATK.Start();
+                            ATK2.Start();
+                        }
+                            if (ATK2.Value == ATK2.End)
                         {
                             ATKA2.Start();
                             A.ScaleX = 100/100f - ATKA2.Value / 100f;
                         }
-                        else { A.ScaleX = ATKA.Value / 100f; }
+                       
                         if (ATKA2.Value == ATKA2.End)
                         {
                             n現在の選択行R = 0;
+
                             //n現在の選択行 = 0;
 
+                        }
+                        if (input.IsPushedKey(KEY_INPUT_RETURN))
+                        {
+                            ATK.Stop();
+                           
                         }
                     }
 
@@ -323,6 +338,7 @@ namespace TJA
                         if (input.IsPushedKey(KEY_INPUT_RETURN))
                         {
                             nダメージ = 1100;
+
                         }
                     }
                     else if (ATK.Value <= 176)//65から176中ダメ
@@ -330,6 +346,7 @@ namespace TJA
                         if (input.IsPushedKey(KEY_INPUT_RETURN))
                         {
                             nダメージ = 1200;
+  
                         }
                     }
                     else if (ATK.Value <= 252)//176から252高ダメ
@@ -337,6 +354,7 @@ namespace TJA
                         if (input.IsPushedKey(KEY_INPUT_RETURN))
                         {
                             nダメージ = 1300;
+           
                         }
                     }
                     else if (ATK.Value <= 288)//252から288最高ダメ
@@ -344,6 +362,7 @@ namespace TJA
                         if (input.IsPushedKey(KEY_INPUT_RETURN))
                         {
                             nダメージ = 1500;
+              
                         }
                     }
                     else if (ATK.Value <= 363)//252から288高ダメ
@@ -351,6 +370,7 @@ namespace TJA
                         if (input.IsPushedKey(KEY_INPUT_RETURN))
                         {
                             nダメージ = 1300;
+                  
                         }
                     }
                     else if (ATK.Value <= 467)//252から288中ダメ
@@ -358,6 +378,7 @@ namespace TJA
                         if (input.IsPushedKey(KEY_INPUT_RETURN))
                         {
                             nダメージ = 1200;
+                    
                         }
                     }
                     else if (ATK.Value <= 524)//252から288最低ダメ
@@ -365,6 +386,7 @@ namespace TJA
                         if (input.IsPushedKey(KEY_INPUT_RETURN))
                         {
                             nダメージ = 1100;
+                       
                         }
                     }
                     else
@@ -372,7 +394,9 @@ namespace TJA
                         if (input.IsPushedKey(KEY_INPUT_RETURN))
                         {
                             nダメージ = 0;
+                         
                         }
+                        nダメージ = 0;
                     }
                 }
                 #endregion
