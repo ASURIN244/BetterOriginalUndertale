@@ -267,7 +267,8 @@ namespace TJA
                             決定音.Play();
                         }
                         
-                    }
+                    }//aaa
+
                         if (n現在の選択行R == 2)
                     {
                         ATKA.Start();
