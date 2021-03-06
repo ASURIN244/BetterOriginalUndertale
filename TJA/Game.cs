@@ -21,6 +21,7 @@ namespace TJA
             Counter Opacity = new Counter(0, 255, 1000, false);
             Counter ATK = new Counter(0, 640, 10000, false);
             Counter ATKA = new Counter(0, 100, 5000, false);
+            Counter ATKA2 = new Counter(0, 100, 5000, false);
             ctキー制限 = new Counter(0, 1, 100000, false);
             ctキー制限.Start();
             var dirPath = @"SystemFile\"+@"クラス別\"+@"game\"+@"Chara\";
@@ -52,18 +53,21 @@ namespace TJA
             Texture FRSK = new Texture(SkinPath + @"game\" + @"Chara.png");
             Texture HP = new Texture(SkinPath + @"game\" + @"HP.png");
             Texture A = new Texture(SkinPath + @"game\" + @"ATTACK.png");
+            Texture Atv = new Texture(SkinPath + @"game\" + @"atb.png");
             Sound 選択音 = new Sound(SkinPath+@"game\"+"select.ogg");
             Sound 決定音 = new Sound(SkinPath + @"game\" + "selected.ogg");
             hp = 10;
             Back.Opacity = 0;
             Chara.Opacity = 0;
             select.Opacity = 0;
-
+            A.ScaleX = ATKA.Value / 100f;
             while (ProcessMessage() == 0 && ScreenFlip() == 0 && ClearDrawScreen() == 0)
             {
                 Opacity.Tick();
                 SoulAnime.Tick();
                 ATKA.Tick();
+                ATKA2.Tick();
+                ATK.Tick();
                 //SoulAnime.Start();
               tennmetu.Tick();
                 ctキー制限.Tick();
@@ -179,7 +183,20 @@ namespace TJA
                 select.Opacity = Opacity.Value / 255f;
                 HP.Opacity = Opacity.Value / 255f;
                 #region [あ、ゴミコードｫ！！♡]
-                if (n現在の選択行==0 && ctキー制限.Value == ctキー制限.End)
+                if (n現在の選択行R == 1 && ctキー制限.Value == 1)
+                {
+
+                    if (input.IsPushedKey(KEY_INPUT_RETURN))
+                    {
+                        ATKA.Value = 0;
+                        ATKA2.Value = 0;
+                        ATK.Value = 0;
+                        n現在の選択行R = 0;
+                        tキー入力R(2);
+                        決定音.Play();
+                    }
+                }
+                else if (n現在の選択行==0 && ctキー制限.Value == ctキー制限.End)
                 {
                    
                         if (input.IsPushedKey(KEY_INPUT_RIGHT))
@@ -259,22 +276,30 @@ namespace TJA
                         tx適.Draw(64,259);
                         
                     }
-                    if (n現在の選択行R == 1 && ctキー制限.Value == ctキー制限.End)
-                    {
-                        if (input.IsPushedKey(KEY_INPUT_RETURN))
-                        {
-                            tキー入力R(2);
-                            決定音.Play();
-                        }
-                        
-                    }//aaa
-
-                        if (n現在の選択行R == 2)
+                   
+                    if (n現在の選択行R==2)
                     {
                         ATKA.Start();
                         A.ReferencePoint = ReferencePoint.Center;
-                        A.ScaleX = ATKA.Value / 100f;
-                        A.Draw((float)(640 / 1.5), (float)(480 / 1.5));
+
+                        A.Draw((float)(640 / 2), (float)(480 / 2));
+                        if (ATKA.Value==100)
+                        {
+                            ATK.Start();
+                            Atv.Draw(0+ATK.Value, 0);
+                        }
+                        if (ATK.Value == ATK.End)
+                        {
+                            ATKA2.Start();
+                            A.ScaleX = 100/100f - ATKA2.Value / 100f;
+                        }
+                        else { A.ScaleX = ATKA.Value / 100f; }
+                        if (ATKA2.Value == ATKA2.End)
+                        {
+                           
+                            //n現在の選択行 = 0;
+
+                        }
                     }
 
                 }
@@ -314,6 +339,7 @@ namespace TJA
                 }
             }
         }
+        private bool battle;
         private int bgmyou;
         public Counter ctキー制限;
         private int n現在の選択行;
