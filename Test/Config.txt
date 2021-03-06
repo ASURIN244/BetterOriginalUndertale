@@ -1,0 +1,3 @@
+Chara:1
+name:Chara
+適の名前:ごみかす
