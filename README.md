@@ -1,0 +1,2 @@
+# BetterOriginalUndertale
+originaundertaleを最初から作る
