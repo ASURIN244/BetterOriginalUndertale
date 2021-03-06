@@ -24,6 +24,8 @@ namespace TJA
             Counter ATKA2 = new Counter(0, 100, 5000, false);
             ctキー制限 = new Counter(0, 1, 100000, false);
             ctキー制限.Start();
+            ctキー制限2 = new Counter(0, 1, 100000, false);
+            ctキー制限2.Start();
             var dirPath = @"SystemFile\"+@"クラス別\"+@"game\"+@"Chara\";
 
             Conf(@"Config.txt");            
@@ -57,6 +59,7 @@ namespace TJA
             Sound 選択音 = new Sound(SkinPath+@"game\"+"select.ogg");
             Sound 決定音 = new Sound(SkinPath + @"game\" + "selected.ogg");
             hp = 10;
+
             Back.Opacity = 0;
             Chara.Opacity = 0;
             select.Opacity = 0;
@@ -67,11 +70,13 @@ namespace TJA
                 SoulAnime.Tick();
                 ATKA.Tick();
                 ATKA2.Tick();
+               // ATK.Start();
                 ATK.Tick();
                 //SoulAnime.Start();
               tennmetu.Tick();
                 ctキー制限.Tick();
-                    tennmetu.Start();  
+                ctキー制限2.Tick();
+                tennmetu.Start();  
                 ChangeFont("JFドット東雲ゴシック14");
               
                 //SetFontSize(20);
@@ -98,7 +103,7 @@ namespace TJA
                 Chara.Draw(0,0);
                 FRSK.Draw(300, 195);
 
-               DrawString(0, 0, n現在の選択行R+"", GetColor(255, 255, 255));
+               DrawString(0, 0, nダメージ+"", GetColor(255, 255, 255));
                 #region [SoulANime(あほコード過ぎて草]
                 if (tennmetu.Value >= 0)
                 {
@@ -183,70 +188,73 @@ namespace TJA
                 select.Opacity = Opacity.Value / 255f;
                 HP.Opacity = Opacity.Value / 255f;
                 #region [あ、ゴミコードｫ！！♡]
-                if (n現在の選択行R == 1 && ctキー制限.Value == 1)
+                if (n現在の選択行R==0 || n現在の選択行R ==1)
                 {
-
-                    if (input.IsPushedKey(KEY_INPUT_RETURN))
+                    if (n現在の選択行R == 1 && ctキー制限.Value == 1)
                     {
-                        ATKA.Value = 0;
-                        ATKA2.Value = 0;
-                        ATK.Value = 0;
-                        n現在の選択行R = 0;
-                        tキー入力R(2);
-                        決定音.Play();
+
+                        if (input.IsPushedKey(KEY_INPUT_RETURN))
+                        {
+                            ATKA.Value = 0;
+                            ATKA2.Value = 0;
+                            ATK.Value = 0;
+                            n現在の選択行R = 0;
+                            tキー入力R(2);
+                            決定音.Play();
+                        }
                     }
-                }
-                else if (n現在の選択行==0 && ctキー制限.Value == ctキー制限.End)
-                {
-                   
+                    else if (n現在の選択行 == 0 && ctキー制限.Value == ctキー制限.End)
+                    {
+
                         if (input.IsPushedKey(KEY_INPUT_RIGHT))
-                {
-                        tキー入力(1);
-                        選択音.Play();
-                }
-                    if (input.IsPushedKey(KEY_INPUT_RETURN))
-                    {
-                        tキー入力R(1);
-                        決定音.Play();
+                        {
+                            tキー入力(1);
+                            選択音.Play();
+                        }
+                        if (input.IsPushedKey(KEY_INPUT_RETURN))
+                        {
+                            tキー入力R(1);
+                            決定音.Play();
+                        }
                     }
-                }
-                if (n現在の選択行 == 1 && ctキー制限.Value == ctキー制限.End)
-                {
-                    
-                    if (input.IsPushedKey(KEY_INPUT_LEFT))
+                    if (n現在の選択行 == 1 && ctキー制限.Value == ctキー制限.End)
                     {
-                        tキー入力(0);
-                        選択音.Play();
-                    }
-                    if (input.IsPushedKey(KEY_INPUT_RIGHT))
-                    {
-                        tキー入力(2);
-                        選択音.Play();
-                    }
-                }
-                if (n現在の選択行 == 2 && ctキー制限.Value == ctキー制限.End)
-                {
 
-                    if (input.IsPushedKey(KEY_INPUT_LEFT))
-                    {
-                        tキー入力(1);
-                        選択音.Play();
+                        if (input.IsPushedKey(KEY_INPUT_LEFT))
+                        {
+                            tキー入力(0);
+                            選択音.Play();
+                        }
+                        if (input.IsPushedKey(KEY_INPUT_RIGHT))
+                        {
+                            tキー入力(2);
+                            選択音.Play();
+                        }
                     }
-                    if (input.IsPushedKey(KEY_INPUT_RIGHT))
+                    if (n現在の選択行 == 2 && ctキー制限.Value == ctキー制限.End)
                     {
-                        tキー入力(3);
-                        選択音.Play();
-                    }
-                }
-                if (n現在の選択行 == 3 && ctキー制限.Value == ctキー制限.End)
-                {
 
-                    if (input.IsPushedKey(KEY_INPUT_LEFT))
-                    {
-                        tキー入力(2);
-                        選択音.Play();
+                        if (input.IsPushedKey(KEY_INPUT_LEFT))
+                        {
+                            tキー入力(1);
+                            選択音.Play();
+                        }
+                        if (input.IsPushedKey(KEY_INPUT_RIGHT))
+                        {
+                            tキー入力(3);
+                            選択音.Play();
+                        }
                     }
-                   
+                    if (n現在の選択行 == 3 && ctキー制限.Value == ctキー制限.End)
+                    {
+
+                        if (input.IsPushedKey(KEY_INPUT_LEFT))
+                        {
+                            tキー入力(2);
+                            選択音.Play();
+                        }
+
+                    }
                 }
                 #endregion
                 #region [選択行系]
@@ -296,12 +304,76 @@ namespace TJA
                         else { A.ScaleX = ATKA.Value / 100f; }
                         if (ATKA2.Value == ATKA2.End)
                         {
-                           
+                            n現在の選択行R = 0;
                             //n現在の選択行 = 0;
 
                         }
                     }
 
+                }
+                #endregion
+                #region[判定機能]
+                {
+                    if (ATK.Value <= 0)//0から65最低ダメ
+                    {
+
+                    }
+                       else if (ATK.Value <=65)//0から65最低ダメ
+                    {
+                        if (input.IsPushedKey(KEY_INPUT_RETURN))
+                        {
+                            nダメージ = 1100;
+                        }
+                    }
+                    else if (ATK.Value <= 176)//65から176中ダメ
+                    {
+                        if (input.IsPushedKey(KEY_INPUT_RETURN))
+                        {
+                            nダメージ = 1200;
+                        }
+                    }
+                    else if (ATK.Value <= 252)//176から252高ダメ
+                    {
+                        if (input.IsPushedKey(KEY_INPUT_RETURN))
+                        {
+                            nダメージ = 1300;
+                        }
+                    }
+                    else if (ATK.Value <= 288)//252から288最高ダメ
+                    {
+                        if (input.IsPushedKey(KEY_INPUT_RETURN))
+                        {
+                            nダメージ = 1500;
+                        }
+                    }
+                    else if (ATK.Value <= 363)//252から288高ダメ
+                    {
+                        if (input.IsPushedKey(KEY_INPUT_RETURN))
+                        {
+                            nダメージ = 1300;
+                        }
+                    }
+                    else if (ATK.Value <= 467)//252から288中ダメ
+                    {
+                        if (input.IsPushedKey(KEY_INPUT_RETURN))
+                        {
+                            nダメージ = 1200;
+                        }
+                    }
+                    else if (ATK.Value <= 524)//252から288最低ダメ
+                    {
+                        if (input.IsPushedKey(KEY_INPUT_RETURN))
+                        {
+                            nダメージ = 1100;
+                        }
+                    }
+                    else
+                    {
+                        if (input.IsPushedKey(KEY_INPUT_RETURN))
+                        {
+                            nダメージ = 0;
+                        }
+                    }
                 }
                 #endregion
                 if (Opacity.Value == Opacity.End)
@@ -339,9 +411,11 @@ namespace TJA
                 }
             }
         }
+        private int nダメージ;
         private bool battle;
         private int bgmyou;
         public Counter ctキー制限;
+        public Counter ctキー制限2;
         private int n現在の選択行;
         private int n現在の選択行R;
         private static Texture Chara;
@@ -365,6 +439,13 @@ namespace TJA
             n現在の選択行R = 行;
             ctキー制限.Start();
             ctキー制限.Value = 0;
+        }
+        public void tキー入力D(int ダメージ)
+        {
+
+            nダメージ = ダメージ;
+            ctキー制限2.Start();
+            ctキー制限2.Value = 0;
         }
         float hp;
     }
