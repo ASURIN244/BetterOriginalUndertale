@@ -7,11 +7,12 @@
     <ProjectGuid>{8B6C0F6E-8869-44FB-B267-D4BB816BAB1B}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>BOU</RootNamespace>
-    <AssemblyName>BOU</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <AssemblyName>BetterOriginalUnderTale</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>x64</PlatformTarget>
