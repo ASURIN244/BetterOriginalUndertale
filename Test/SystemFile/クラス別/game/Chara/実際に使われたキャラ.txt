@@ -86,3 +86,4 @@ SystemFile\クラス別\game\Chara\Chara_1.png
 SystemFile\クラス別\game\Chara\Chara_1.png
 SystemFile\クラス別\game\Chara\Chara_1.png
 SystemFile\クラス別\game\Chara\Chara_1.png
+SystemFile\クラス別\game\Chara\Chara_1.png

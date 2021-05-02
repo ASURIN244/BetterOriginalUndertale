@@ -604,7 +604,7 @@ namespace TJA
                     }
                     
                 }
-                DrawString(0, 0, "BGM:" + headers.tati3, GetColor(255, 255, 255));
+                //DrawString(0, 0, "BGM:" + headers.tati3, GetColor(255, 255, 255));
                 HP.Draw(275, 385);
                 hp = headers.tati5;
                 HP.ScaleX = hp / 20f;
