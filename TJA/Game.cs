@@ -44,7 +44,7 @@ namespace TJA
 
             }
 
-            FontFamily ff = new FontFamily("JFドット東雲ゴシック14");
+            FontFamily ff = new FontFamily(headers.tati10);
             FontRender fr = new FontRender(ff, 15, 5);
             Texture txTest = fr.GetTexture(headers.tati);
             Texture tx適 = fr.GetTexture(headers.tati2);
@@ -88,7 +88,7 @@ namespace TJA
                 ctキー制限.Tick();
                 ctキー制限2.Tick();
                 tennmetu.Start();
-                ChangeFont("JFドット東雲ゴシック14");
+                ChangeFont(headers.tati10);
 
                 //SetFontSize(20);
                 Exit.Tick();
@@ -635,6 +635,7 @@ namespace TJA
                         else if (strSplitComma[0].Equals("こうどう2")) headers.tati7 = strSplitComma[1];
                         else if (strSplitComma[0].Equals("こうどう3")) headers.tati8 = strSplitComma[1];
                         else if (strSplitComma[0].Equals("こうどう4")) headers.tati9 = strSplitComma[1];
+                        else if (strSplitComma[0].Equals("フォント名")) headers.tati10 = strSplitComma[1];
                         else if (strSplitComma[0].Equals("最大体力")) headers.tati5 = int.Parse(strSplitComma[1]);
                     }
                 }
@@ -664,6 +665,7 @@ namespace TJA
             public string tati7;
             public string tati8;
             public string tati9;
+            public string tati10;
             public int tati5;
         }
         public void tキー入力(int 行)
